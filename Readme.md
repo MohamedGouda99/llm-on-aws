@@ -117,9 +117,4 @@ Developer Push ➝ GitHub Actions
 - Kubernetes deploy job uses `sed` to patch in latest Docker image URI before applying.
 
 ---
-
-## 🤝 Contributions
-
-Pull requests are welcome. For major changes, open an issue first.
-
----
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/MohamedGouda99/llm-on-aws)
