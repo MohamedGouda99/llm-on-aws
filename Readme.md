@@ -116,5 +116,6 @@ Developer Push ➝ GitHub Actions
 - Backend is a Flask API and frontend is static NGINX — all bundled into Docker.
 - Kubernetes deploy job uses `sed` to patch in latest Docker image URI before applying.
 
+---
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/MohamedGouda99/llm-on-aws)
