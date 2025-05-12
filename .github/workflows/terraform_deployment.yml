@@ -2,8 +2,6 @@ name: Terraform Apply
 
 on:
   push:
-    paths:
-      - 'infra/**'
     branches: [main]
 
 jobs:
@@ -29,4 +27,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         terraform init
-        terraform apply -auto-approve
+        terraform apply --auto-approve
