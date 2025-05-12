@@ -49,6 +49,7 @@ jobs:
     - name: Inject image URI into manifest
       run: |
         sed -i "s|image:.*|image: $IMAGE_URI|" deployment.yml
+        cat deployment.yml
 
     - name: Deploy to Kubernetes
       run: |
