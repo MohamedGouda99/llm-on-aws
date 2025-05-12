@@ -1,5 +1,5 @@
 # Ignore Terraform files
-app/*.tf
-app/.terraform/*
-app/terraform.tfstate.backup
-app/terraform.tfstate
+infra/.terraform/*
+infra/terraform.tfstate.backup
+infra/terraform.tfstate
+llm.pem
