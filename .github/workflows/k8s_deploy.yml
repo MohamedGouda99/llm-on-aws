@@ -1,14 +1,17 @@
 name: Deploy to Kubernetes
 
 on:
-  workflow_run:
-    workflows: ["Build and Push Docker Image"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
+    if: github.event.head_commit.message == 'k8s deploy'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: k8s
 
     env:
       ECR_REPO: ${{ secrets.ECR_REPOSITORY }}
@@ -47,10 +50,8 @@ jobs:
 
     - name: Inject image URI into manifest
       run: |
-        cd k8s-manifests
         sed -i "s|image:.*|image: $IMAGE_URI|" deployment.yml
 
     - name: Deploy to Kubernetes
       run: |
-        cd k8s-manifests
-        kubectl apply -f deployment.yml
+        kubectl apply -f deployment.yml && kubectl apply -f svc.yml

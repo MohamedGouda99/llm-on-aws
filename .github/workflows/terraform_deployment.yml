@@ -8,6 +8,7 @@ on:
 
 jobs:
   terraform:
+    if: startsWith(github.event.head_commit.message, 'terraform apply')
     runs-on: ubuntu-latest
     defaults:
       run:

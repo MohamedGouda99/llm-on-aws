@@ -1,14 +1,17 @@
 name: Build and Push Docker Image
 
 on:
-  workflow_run:
-    workflows: ["Terraform Apply"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   build-and-push:
+    if: github.event.head_commit.message == 'change image'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
 
     steps:
     - name: Checkout code
