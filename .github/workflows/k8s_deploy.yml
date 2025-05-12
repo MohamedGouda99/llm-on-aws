@@ -13,10 +13,8 @@ jobs:
       run:
         working-directory: k8s
 
-    env:
-      ECR_REPO: ${{ secrets.ECR_REPOSITORY }}
-      AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+    
+      
 
     steps:
     - name: Checkout code
@@ -32,20 +30,20 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
     - name: Update kubeconfig
-      run: aws eks update-kubeconfig --name hr-stag-eksdemo1 --region ${{ env.AWS_REGION }}
+      run: aws eks update-kubeconfig --name hr-stag-eksdemo1 --region ${{ secrets.AWS_DEFAULT_REGION }}
 
     - name: Get latest image tag from ECR
       id: get-tag
       run: |
         TAG=$(aws ecr describe-images \
-          --repository-name $ECR_REPO \
-          --region $AWS_REGION \
+          --repository-name ${{ secrets.ECR_REPOSITORY }} \
+          --region ${{ secrets.AWS_DEFAULT_REGION }} \
           --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' \
           --output text)
-        IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$TAG"
+        IMAGE_URI="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/${{ secrets.AWS_ACCOUNT_ID }}:$TAG"
         echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
 
     - name: Inject image URI into manifest
