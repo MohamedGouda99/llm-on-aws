@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: myapp1-container
-          image: PLACEHOLDER_IMAGE_URI
+          image: 
           ports:
             - containerPort: 8080
