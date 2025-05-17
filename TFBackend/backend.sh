@@ -2,7 +2,7 @@
 
 # ======= CONFIGURATION ========
 REGION="us-east-1"
-BUCKET_NAME="ttf-remote-backend-state"
+BUCKET_NAME="ttf-remote-backend-state-4286"
 DYNAMO_TABLE="terraform-locks"
 STATE_KEY="dev/terraform.tfstate"
 # ==============================
@@ -49,15 +49,15 @@ aws dynamodb create-table \
   --billing-mode PAY_PER_REQUEST 2>/dev/null
 
 echo "✅ Done! You can now use the following Terraform backend config:"
-cat <<EOF
+# cat <<EOF
 
-terraform {
-  backend "s3" {
-    bucket         = "$BUCKET_NAME"
-    key            = "$STATE_KEY"
-    region         = "$REGION"
-    dynamodb_table = "$DYNAMO_TABLE"
-    encrypt        = true
-  }
-}
-EOF
+# terraform {
+#   backend "s3" {
+#     bucket         = "$BUCKET_NAME"
+#     key            = "$STATE_KEY"
+#     region         = "$REGION"
+#     dynamodb_table = "$DYNAMO_TABLE"
+#     encrypt        = true
+#   }
+# }
+# EOF
