@@ -111,8 +111,5 @@ terraform destroy -auto-approve
 
 ---
 
-## 📬 Contact
-
-For questions or support, please contact the repository maintainer.
 
 
